@@ -42,6 +42,7 @@ export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
               variant="ghost"
               size="icon"
               className="h-8 w-8 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-50"
+              aria-label="Open menu"
             >
               <MoreVertical className="h-4 w-4" />
             </Button>
