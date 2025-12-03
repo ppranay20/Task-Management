@@ -8,13 +8,11 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   // Fetch all tasks
   const fetchTasks = useCallback(async () => {
     try {
       setIsLoading(true);
-      setError(null);
       const token = localStorage.getItem("auth_token");
 
       const response = await axios.get(`${API_BASE_URL}/api/tasks`, {
@@ -26,7 +24,6 @@ export function useTasks() {
       setTasks(response.data.tasks || response.data);
     } catch (err: any) {
       const errorMessage = err.response?.data?.error || "Failed to fetch tasks";
-      setError(errorMessage);
       toast.error("Error", { description: errorMessage });
     } finally {
       setIsLoading(false);
@@ -121,7 +118,6 @@ export function useTasks() {
   return {
     tasks,
     isLoading,
-    error,
     addTask,
     updateTask,
     deleteTask,
