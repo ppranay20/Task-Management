@@ -15,7 +15,7 @@ datasource db {
 
 // User model
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   username  String   @unique
   password  String   
   tasks     Task[]
@@ -30,11 +30,11 @@ enum TaskStatus {
 
 // Task model
 model Task {
-  id          Int        @id @default(autoincrement())
+  id          String     @id @default(uuid())
   title       String
   description String?
   status      TaskStatus @default(PENDING)
-  userId      Int
+  userId      String
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
