@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import cors from "cors";
 import authRoutes from "./routes/auth";
 import taskRoutes from "./routes/task";
 
@@ -7,6 +8,12 @@ const router = Router();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Health check endpoint
