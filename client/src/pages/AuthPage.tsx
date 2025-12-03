@@ -16,7 +16,7 @@ import { RegisterForm } from "../components/RegisterForm";
 
 export function AuthPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 p-4">
       <Card className="w-full max-w-md shadow-lg dark:bg-slate-900 dark:border-slate-800">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center text-slate-900 dark:text-slate-50">
