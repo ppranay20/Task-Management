@@ -3,29 +3,14 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { prisma } from "../lib/prisma";
 import { z } from "zod";
-
-// Zod Schema for Validation
-const RegisterSchema = z.object({
-  username: z.string().min(3, "Username must be at least 3 characters long"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
-});
-
-const LoginSchema = z.object({
-  username: z.string().min(1, "Username is required"),
-  password: z.string().min(1, "Password is required"),
-});
-
-// Helper to format Zod errors
-const formatZodError = (error: any) => {
-  return error.errors.map((e: any) => e.message).join(", ");
-};
+import { RegisterSchema, LoginSchema } from "../lib/schema";
 
 export const register = async (req: Request, res: Response) => {
   try {
     // 1. Validate Input
     const parsed = RegisterSchema.safeParse(req.body);
     if (!parsed.success) {
-      return res.status(400).json({ error: formatZodError(parsed.error) });
+      return res.status(400).json({ error: z.treeifyError(parsed.error) });
     }
 
     const { username, password } = parsed.data;
@@ -60,7 +45,7 @@ export const login = async (req: Request, res: Response) => {
     // 1. Validate Input
     const parsed = LoginSchema.safeParse(req.body);
     if (!parsed.success) {
-      return res.status(400).json({ error: formatZodError(parsed.error) });
+      return res.status(400).json({ error: z.treeifyError(parsed.error) });
     }
 
     const { username, password } = parsed.data;

@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import authRoutes from "./routes/auth";
+import taskRoutes from "./routes/task";
 
 const app = express();
 const router = Router();
@@ -18,6 +19,9 @@ app.use("/api", router);
 
 // Register auth routes
 router.use("/auth", authRoutes);
+
+// Register task routes
+router.use("/tasks", taskRoutes);
 
 // Start server
 app.listen(PORT, () => {
